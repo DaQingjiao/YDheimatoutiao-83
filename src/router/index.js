@@ -10,6 +10,15 @@ const router = new VueRouter({
     name: 'login',
     path: '/login',
     component: () => import('@/views/login')
+  },
+  {
+    path: '/',
+    component: () => import('@/views/tabbar'),
+    children: [{
+      name: 'home',
+      path: '',
+      component: () => import('@/views/home')
+    }]
   }
   ]
 })
