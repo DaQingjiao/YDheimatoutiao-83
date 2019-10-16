@@ -2,8 +2,29 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import '@/utils/date'
 import '@/styles/index.less'
-import { NavBar, Cell, CellGroup, Field, Button, Toast, Tabbar, TabbarItem, Tab, Tabs, List } from 'vant' // 导入组件
+import {
+  NavBar,
+  Cell,
+  CellGroup,
+  Field,
+  Button,
+  Toast,
+  Tabbar,
+  TabbarItem,
+  Tab,
+  Tabs,
+  List,
+  PullRefresh,
+  Search,
+  Grid,
+  GridItem,
+  Image,
+  Icon,
+  Lazyload,
+  Popup
+} from 'vant' // 导入组件
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate' // 导入组件
 import zhCN from 'vee-validate/dist/locale/zh_CN' // 加载验证插件的语言包
 import * as rules from 'vee-validate/dist/rules'
@@ -43,6 +64,14 @@ Vue
   .use(Tab)
   .use(Tabs)
   .use(List)
+  .use(PullRefresh)
+  .use(Search)
+  .use(Grid)
+  .use(GridItem)
+  .use(Image)
+  .use(Icon)
+  .use(Lazyload)
+  .use(Popup)
 
 Vue.config.productionTip = false
 
