@@ -49,7 +49,8 @@
           <van-list v-model="item.loading" :finished="item.finished" finished-text="没有更多了"
             @load="onLoad">
             <!-- 列表内容 -->
-            <van-cell v-for="(it,index) in item.articles" :key="index" :title="it.title">
+            <van-cell @click="$router.push(`/article/${it.art_id}`)"
+              v-for="(it,index) in item.articles" :key="index" :title="it.title">
               <div slot="label">
                 <van-grid :border="false" :column-num="3">
                   <van-grid-item v-for="(img, index) in it.cover.images" :key="index">

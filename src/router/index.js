@@ -12,19 +12,29 @@ const router = new VueRouter({
     component: () => import('@/views/login')
   },
   {
+    // 搜索页面
     name: 'search',
     path: '/search',
     component: () => import('@/views/search')
   },
   {
+    // 搜索文章
     name: 'search-result',
     path: '/search/:q',
     component: () => import('@/views/search-result')
   },
   {
+    // 首页文章
+    name: 'article',
+    path: '/article/:articleId',
+    component: () => import('@/views/article')
+  },
+  {
+    // 导航栏
     path: '/',
     component: () => import('@/views/tabbar'),
     children: [{
+      // 首页
       name: 'home',
       path: '',
       component: () => import('@/views/home')
