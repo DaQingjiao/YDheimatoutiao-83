@@ -17,6 +17,11 @@ const router = new VueRouter({
     component: () => import('@/views/search')
   },
   {
+    name: 'search-result',
+    path: '/search/:q',
+    component: () => import('@/views/search-result')
+  },
+  {
     path: '/',
     component: () => import('@/views/tabbar'),
     children: [{

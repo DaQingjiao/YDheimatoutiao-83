@@ -68,6 +68,7 @@ export default {
         setItem('user', res.data.data)
 
         this.$toast.success(res.data.message)
+        this.$router.push('/')
       } catch (err) {
         if (err.response && err.response.status === 400) {
           this.$toast.fail('登录失败，手机号或验证码错误')

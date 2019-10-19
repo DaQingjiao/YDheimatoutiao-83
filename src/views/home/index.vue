@@ -1,7 +1,12 @@
 <template>
   <div class="home">
     <!-- 导航栏 -->
-    <van-nav-bar title="首页" fixed />
+    <van-nav-bar title="首页" fixed>
+      <van-button class="search-btn" slot="title" round type="info" size="small"
+        @click="$router.push('/search')">
+        搜索
+      </van-button>
+    </van-nav-bar>
 
     <!-- 标签栏 -->
     <van-tabs v-model="active">
@@ -54,7 +59,7 @@
                 <div>
                   <div class="meta">
                     <span>{{ it.aut_name }}</span>
-                    <span>{{ it.comm_count }}评论</span>
+                    <span>( {{ it.comm_count }} )评论</span>
                     <span>{{ it.pubdate | relativeTime }}</span>
                   </div>
                 </div>
@@ -206,6 +211,10 @@ export default {
 
 <style lang="less" scoped>
 .home {
+  .search-btn {
+    width: 100%;
+    background: #5babfb;
+  }
   .van-tabs {
     .wap-nav {
       position: fixed;
