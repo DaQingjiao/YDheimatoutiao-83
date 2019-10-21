@@ -4,7 +4,7 @@
     <van-search v-model="searchText" placeholder="请输入搜索关键词" show-action shape="round"
       @search="onSearch(searchText)" @input="SearchInput">
       <div slot="action" @click="onSearch(searchText)">搜索</div>
-      <van-icon @click="$router.push('/')" class="search-icon" slot="label" name="arrow-left"
+      <van-icon @click="$router.back()" class="search-icon" slot="label" name="arrow-left"
         size="16px" />
     </van-search>
     <van-cell-group>

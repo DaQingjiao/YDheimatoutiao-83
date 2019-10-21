@@ -30,6 +30,18 @@ const router = new VueRouter({
     component: () => import('@/views/article')
   },
   {
+    // 我的信息页
+    name: 'user',
+    path: '/user',
+    component: () => import('@/views/user')
+  },
+  {
+    // 小度页面
+    name: 'chat',
+    path: '/chat',
+    component: () => import('@/views/chat')
+  },
+  {
     // 导航栏
     path: '/',
     component: () => import('@/views/tabbar'),
@@ -38,6 +50,12 @@ const router = new VueRouter({
       name: 'home',
       path: '',
       component: () => import('@/views/home')
+    },
+    {
+      // 我的页面
+      name: 'my',
+      path: '/my',
+      component: () => import('@/views/my')
     }]
   }
   ]

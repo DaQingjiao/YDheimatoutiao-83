@@ -49,7 +49,7 @@
           <van-list v-model="item.loading" :finished="item.finished" finished-text="没有更多了"
             @load="onLoad">
             <!-- 列表内容 -->
-            <van-cell @click="$router.push(`/article/${it.art_id}`)"
+            <van-cell @click="$router.push(`/article/${it.art_id.toString()}`)"
               v-for="(it,index) in item.articles" :key="index" :title="it.title">
               <div slot="label">
                 <van-grid :border="false" :column-num="3">

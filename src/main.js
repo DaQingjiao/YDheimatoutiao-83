@@ -23,7 +23,11 @@ import {
   Image,
   Icon,
   Lazyload,
-  Popup
+  Popup,
+  Loading,
+  DatetimePicker,
+  ActionSheet,
+  Dialog
 } from 'vant' // 导入组件
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate' // 导入组件
 import zhCN from 'vee-validate/dist/locale/zh_CN' // 加载验证插件的语言包
@@ -72,6 +76,10 @@ Vue
   .use(Icon)
   .use(Lazyload)
   .use(Popup)
+  .use(Loading)
+  .use(DatetimePicker)
+  .use(ActionSheet)
+  .use(Dialog)
 
 Vue.config.productionTip = false
 
