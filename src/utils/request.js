@@ -1,7 +1,7 @@
 import axios from 'axios'
 import JSONbig from 'json-bigint'
 import store from '@/store'
-// import router from '@/router'
+import router from '@/router' // 非组件模块中使用容器，就直接加载即可
 import { promised } from 'q'
 
 // axios.create 方法 ：复制axios，拥有和axios完全相同的功能，只是配置不同
@@ -33,15 +33,47 @@ request.interceptors.request.use(function (config) {
 // ----------请求拦截器
 
 // ----------响应拦截器
-// request.interceptors.response.use(function (response) {
-//   return response
-// }), function (error) {
-//   const { user } = store.state
-//   if (!user) {
-//     router.push({ name: 'login' })
-//   } else {
-//     config.headers.Authorization = `Bearer ${user.token}`
-//   }
-// }
+request.interceptors.response.use(function (response) {
+  return response
+}, async function (error) {
+  // 如状态码为401
+  // console.dir(error.config) 有之前请求失败的数据
+  if (error.response && error.response.status === 401) {
+    const { user } = store.state
+    if (!user) { // 如没有user，则直接跳转登录页
+      router.push(`/login?redirect = router.currentRoute.fullPath`) // 登录返回之前页面
+      // =====================
+      // router.push({
+      //   name: 'login',
+      //   query: {
+      //     redirect: router.currentRoute.fullPath
+      //     // foo: 'bar'
+      //   }
+      // })
+      // =====================
+    } else { // 如有user,则请求获取新的token
+      try {
+        const { data } = await axios({
+          url: '/app/v1_0/authorizations',
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${user.refresh_token}`
+          }
+        })
+
+        store.commit('setUser', { // 将最新的token，替换原有token
+          token: data.data.token,
+          refresh_token: user.refresh_token // 原来的refresh_token
+        })
+
+        return request(error.config) // 继续完成之前失败的请求
+      } catch (err) { // 如没有refresh_token,则只能重新登录
+        router.push(`/login?redirect = router.currentRoute.fullPath`)
+      }
+    }
+  }
+  // 如refresh_token, 则请求刷新token
+  return promised.reject(error)
+})
 // ----------响应拦截器
 export default request

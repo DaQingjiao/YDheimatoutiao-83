@@ -68,7 +68,9 @@ export default {
         setItem('user', res.data.data)
 
         this.$toast.success(res.data.message)
-        this.$router.push('/')
+
+        // 如从其他页面条转过来的，则返回其他页面；不是，则返回首页
+        this.$router.push(this.$route.query.redirect || '/')
       } catch (err) {
         if (err.response && err.response.status === 400) {
           this.$toast.fail('登录失败，手机号或验证码错误')

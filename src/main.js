@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import '@/utils/date'
 import '@/styles/index.less'
+import fastClick from 'fastclick'
 import {
   NavBar,
   Cell,
@@ -44,6 +45,9 @@ for (let rule in rules) {
 // 注册为全局组件
 Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('ValidationObserver', ValidationObserver)
+
+// 解决移动端点击 300ms 延迟问题
+fastClick.attach(document.body)
 
 // 扩展自定义校验规则
 // extend('规则名称', 配置对象)
