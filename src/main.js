@@ -5,6 +5,7 @@ import store from './store'
 import '@/utils/date'
 import '@/styles/index.less'
 import fastClick from 'fastclick'
+import 'amfe-flexible/index.js' // 动态设置 html 标签的字体大小
 import {
   NavBar,
   Cell,

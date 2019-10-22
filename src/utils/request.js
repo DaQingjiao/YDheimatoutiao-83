@@ -40,8 +40,10 @@ request.interceptors.response.use(function (response) {
   // console.dir(error.config) 有之前请求失败的数据
   if (error.response && error.response.status === 401) {
     const { user } = store.state
-    if (!user) { // 如没有user，则直接跳转登录页
-      router.push(`/login?redirect = router.currentRoute.fullPath`) // 登录返回之前页面
+    if (!user || !user.refresh_token) { // 如没有user，则直接跳转登录页
+      // 在非组件中获取当前路由对象使用：router.currentRoute
+      router.push(`/login?redirect=${router.currentRoute.fullPath}`) // 登录返回之前页面
+
       // =====================
       // router.push({
       //   name: 'login',
@@ -54,7 +56,7 @@ request.interceptors.response.use(function (response) {
     } else { // 如有user,则请求获取新的token
       try {
         const { data } = await axios({
-          url: '/app/v1_0/authorizations',
+          url: 'http://ttapi.research.itcast.cn/app/v1_0/authorizations',
           method: 'PUT',
           headers: {
             Authorization: `Bearer ${user.refresh_token}`
@@ -68,7 +70,7 @@ request.interceptors.response.use(function (response) {
 
         return request(error.config) // 继续完成之前失败的请求
       } catch (err) { // 如没有refresh_token,则只能重新登录
-        router.push(`/login?redirect = router.currentRoute.fullPath`)
+        router.push(`/login?redirect=${router.currentRoute.fullPath}`)
       }
     }
   }
